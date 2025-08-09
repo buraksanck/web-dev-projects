@@ -7,4 +7,5 @@ Her proje kendi klasörü içinde bulunur ve ayrı çalıştırılabilir.
 
 ### 1. Weather App
 - Şehir ismine göre hava durumu bilgisini gösterir.
-- Kullanılan Teknolojiler: HTML, CSS, JavaScript, OpenWeatherMap API
+- Kullanılan Teknolojiler: HTML, CSS, JavaScript, WeatherAPI
+- <a href="https://buraksanck.github.io/web-dev-projects/weather-app/index.html">Canlı Demo</a>
