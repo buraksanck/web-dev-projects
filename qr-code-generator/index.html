@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>QR Code Generator & Reader</title>
+    <meta name="description" content="Metni/linki QR koda dönüştürün ve kamerayla/imageden QR okuyun." />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                DEFAULT: '#2563eb',
+                50: '#eff6ff',
+                100: '#dbeafe',
+                200: '#bfdbfe',
+                300: '#93c5fd',
+                400: '#60a5fa',
+                500: '#3b82f6',
+                600: '#2563eb',
+                700: '#1d4ed8',
+                800: '#1e40af',
+                900: '#1e3a8a'
+              }
+            }
+          }
+        }
+      }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
+  </head>
+  <body class="min-h-dvh bg-white text-slate-800 antialiased">
+    <header class="sticky top-0 z-10 border-b border-slate-200 bg-white/80 backdrop-blur">
+      <div class="mx-auto max-w-6xl px-4 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="h-9 w-9 rounded-lg bg-brand-600 text-white grid place-items-center font-bold">QR</div>
+          <div>
+            <h1 class="text-lg font-semibold">QR Code Generator & Reader</h1>
+            <p class="text-xs text-slate-500">Burak Sancak</p>
+          </div>
+        </div>
+        <div class="hidden sm:flex items-center gap-2 text-xs text-slate-500">
+          <span class="inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
+          <span>Hızlı QR Oluşturucu ve Okuyucu</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="mx-auto max-w-6xl px-4 py-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <section class="rounded-2xl border border-slate-200 bg-white shadow-sm">
+          <div class="p-6 border-b border-slate-200">
+            <h2 class="text-base font-semibold">QR Kod Oluştur</h2>
+          </div>
+          <div class="p-6 space-y-5">
+            <div>
+              <label for="inputText" class="block text-sm font-medium mb-2">Metin / Bağlantı</label>
+              <textarea id="inputText" rows="4" class="w-full rounded-lg border-slate-300 focus:border-brand-500 focus:ring-brand-500 p-3" placeholder="Örn. https://example.com veya herhangi bir metin"></textarea>
+              <p id="inputError" class="mt-2 text-sm text-rose-600 hidden">Lütfen en az 1 karakter girin.</p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label for="qrSize" class="block text-sm font-medium mb-2">Boyut (px)</label>
+                <input id="qrSize" type="range" min="128" max="512" value="256" class="w-full" />
+                <div class="mt-1 text-xs text-slate-500"><span id="qrSizeValue">256</span> px</div>
+              </div>
+              <div>
+                <label for="qrEcc" class="block text-sm font-medium mb-2">Hata Düzeyi</label>
+                <select id="qrEcc" class="w-full rounded-lg border-slate-300 focus:border-brand-500 focus:ring-brand-500">
+                  <option value="L">L (en düşük)</option>
+                  <option value="M" selected>M</option>
+                  <option value="Q">Q</option>
+                  <option value="H">H (en yüksek)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-3">
+              <button id="btnGenerate" class="inline-flex items-center justify-center rounded-lg bg-brand-600 px-4 py-2 text-white hover:bg-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2">
+                Oluştur
+              </button>
+              <button id="btnClear" class="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-4 py-2 text-slate-700 hover:bg-slate-50">
+                Temizle
+              </button>
+              <button id="btnDownload" class="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-4 py-2 text-slate-700 hover:bg-slate-50 disabled:opacity-50" disabled>
+                PNG indir
+              </button>
+            </div>
+
+            <div>
+              <div class="text-sm font-medium mb-2">Önizleme</div>
+              <div class="relative grid place-items-center rounded-xl border border-dashed border-slate-300 bg-slate-50/60 p-4 min-h-[300px]">
+                <div id="qrcode" class="[&_img]:mx-auto [&_canvas]:mx-auto"></div>
+                <div id="qrEmpty" class="absolute inset-0 grid place-items-center text-slate-400 text-sm">
+                  Henüz bir QR kod yok
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="rounded-2xl border border-slate-200 bg-white shadow-sm">
+          <div class="p-6 border-b border-slate-200">
+            <h2 class="text-base font-semibold">QR Kod Oku</h2>
+          </div>
+          <div class="p-6 space-y-5">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="cameraSelect" class="block text-sm font-medium mb-2">Kamera Seç</label>
+                <select id="cameraSelect" class="w-full rounded-lg border-slate-300 focus:border-brand-500 focus:ring-brand-500"></select>
+              </div>
+              <div class="flex items-end gap-3">
+                <button id="btnStart" class="inline-flex flex-1 items-center justify-center rounded-lg bg-emerald-600 px-4 py-2 text-white hover:bg-emerald-700">Başlat</button>
+                <button id="btnStop" class="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-4 py-2 text-slate-700 hover:bg-slate-50 disabled:opacity-50" disabled>Durdur</button>
+              </div>
+            </div>
+
+            <div class="rounded-xl border border-slate-200 overflow-hidden bg-slate-50">
+              <div class="aspect-video relative bg-black/80">
+                <video id="video" class="absolute inset-0 h-full w-full object-cover" autoplay muted playsinline></video>
+                <canvas id="overlay" class="absolute inset-0 h-full w-full" aria-hidden="true"></canvas>
+                <div id="videoPlaceholder" class="absolute inset-0 grid place-items-center text-slate-400 text-sm">Kamera bekleniyor…</div>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-end">
+              <div>
+                <label for="fileInput" class="block text-sm font-medium mb-2">Görselden Oku</label>
+                <input id="fileInput" type="file" accept="image/*" class="block w-full text-sm text-slate-700 file:mr-4 file:rounded-lg file:border-0 file:bg-brand-50 file:px-4 file:py-2 file:text-brand-700 hover:file:bg-brand-100" />
+              </div>
+              <div class="flex items-center gap-3">
+                <button id="btnCopyResult" class="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-4 py-2 text-slate-700 hover:bg-slate-50 disabled:opacity-50" disabled>Kopyala</button>
+                <button id="btnClearResult" class="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-4 py-2 text-slate-700 hover:bg-slate-50 disabled:opacity-50" disabled>Temizle</button>
+              </div>
+            </div>
+
+            <div>
+              <label for="scanResult" class="block text-sm font-medium mb-2">Okunan Sonuç</label>
+              <textarea id="scanResult" rows="3" class="w-full rounded-lg border-slate-300 focus:border-brand-500 focus:ring-brand-500 p-3" placeholder="Sonuç burada görünecek" readonly></textarea>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="mx-auto max-w-6xl px-4 py-8 text-xs text-slate-500">
+      <div class="flex items-center justify-between flex-wrap gap-3">
+        <p>© <span id="year"></span> QR Tool • Yalnızca tarayıcıda çalışır</p>
+        <p>Kitaplıklar: qrcodejs, jsQR</p>
+      </div>
+    </footer>
+
+    <script src="./script.js"></script>
+  </body>
+  </html>
+
