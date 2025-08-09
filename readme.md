@@ -53,3 +53,15 @@ Her proje kendi klasörü içinde bulunur ve ayrı çalıştırılabilir.
 - **Özellikler:** Mobil uyumlu menü, promosyon slider, paket fiyat listesi, iletişim formu, sık sorulan sorular bölümü, hover/scroll animasyonları.
 - **Kullanılan Teknolojiler:** HTML, CSS (Tailwind), JavaScript
 - 🔗 **Canlı Demo:** [Canlı Demo](https://buraksanck.github.io/web-dev-projects/catering-landing-page/index.html)
+
+- ### 8) To-Do-App
+- Görev ekleme
+- **Tamamlama / Silme** butonları, geciken görevler için ⚠️ uyarısı ve kırmızı kart
+- **Filtreler:** Tümü • Bekleyen • Tamamlanan • Geciken
+- **İstatistik paneli:** Toplam, Tamamlanan, Bekleyen, Geciken ve **Başarı Oranı**  
+  - Başarı oranı mantığı: zamanında tamamlanan = %100, geç tamamlanan = %70, tamamlanmayan = %0
+- **Haftalık takvim görünümü:** Gün bazında görev rozetleri, “Bu hafta / Gelecek hafta” etiketi, haftalar arası gezinme
+- **Tarih/Saat özellikleri:** Bugünün tarihi başlıkta gösterilir, bitiş tarihi için minimum değer otomatik “şimdi”
+- **Gerçek zamanlı tazeleme:** Her dakikada bir istatistikler ve takvim otomatik güncellenir
+- **Kullanılan Teknolojiler:** HTML, CSS (Tailwind), JavaScript (vanilla)
+- 🔗 **Canlı Demo:** <a href="to-do-app/index.html">Canlı Demo</a>
