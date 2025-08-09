@@ -3,28 +3,10 @@ const memoryListEl = document.getElementById('memoryList');
 const memoryCountEl = document.getElementById('memoryCount');
 
 let displayExpression = '0';
-let currentValue = null;
-let operator = null;
-let waitingForOperand = false;
-let currentInput = '0';
-let previousInput = null;
-
 let memory = loadMemory();
 
 function updateDisplay() {
-    display.textContent = displayExpression;
-  }
-
-function performCalculation(first, second, op) {
-  switch (op) {
-    case '+': return first + second;
-    case '-': return first - second;
-    case '*': return first * second;
-    case '/':
-      if (second === 0) { alert('Sıfıra bölme hatası!'); return first; }
-      return first / second;
-    default:  return second;
-  }
+  display.textContent = displayExpression;
 }
 
 function saveMemory() {
@@ -36,9 +18,29 @@ function loadMemory() {
   try {
     const raw = localStorage.getItem('calculator_memory');
     return raw ? JSON.parse(raw) : [];
-  } catch { return []; }
+  } catch {
+    return [];
+  }
 }
 
+function isOperator(ch) {
+  return ['+', '-', '*', '/'].includes(ch);
+}
+
+function lastTokenIsOperator(expr) {
+  if (!expr.length) return false;
+  return isOperator(expr[expr.length - 1]);
+}
+
+function getLastNumberChunk(expr) {
+  const parts = expr.split(/([+\-*/])/);
+  for (let i = parts.length - 1; i >= 0; i--) {
+    if (parts[i] && !isOperator(parts[i])) return parts[i];
+  }
+  return '';
+}
+
+// === Memory UI ===
 function renderMemory() {
   memoryListEl.innerHTML = '';
   memoryCountEl.textContent = `${memory.length} kayıt`;
@@ -50,7 +52,8 @@ function renderMemory() {
 
   memory.forEach((val, idx) => {
     const li = document.createElement('li');
-    li.className = 'bg-white rounded-lg border border-gray-200 px-3 py-2 flex items-center justify-between cursor-pointer hover:bg-gray-50';
+    li.className =
+      'bg-white rounded-lg border border-gray-200 px-3 py-2 flex items-center justify-between cursor-pointer hover:bg-gray-50';
     li.title = 'Ekrana getir';
 
     const left = document.createElement('span');
@@ -58,8 +61,7 @@ function renderMemory() {
     left.textContent = val;
 
     li.addEventListener('click', () => {
-      currentInput = String(val);
-      waitingForOperand = false;
+      displayExpression = String(val);
       updateDisplay();
     });
 
@@ -79,111 +81,91 @@ function renderMemory() {
   });
 }
 
-function setOperator(nextOperator) {
-    const inputValue = parseFloat(currentInput);
-  
-    if (operator && waitingForOperand) {
-      operator = nextOperator;
-      currentInput = currentInput.slice(0, -1) + nextOperator;
-      updateDisplay();
-      return;
-    }
-  
-    if (previousInput === null) {
-      previousInput = inputValue;
-    } else if (operator) {
-      const newValue = performCalculation(previousInput, inputValue, operator);
-      previousInput = newValue;
-      currentInput = String(newValue);
-    }
-  
-    operator = nextOperator;
-    currentInput = currentInput + nextOperator;
-    updateDisplay();
-    waitingForOperand = true;
-  }
-
-  function calculate() {
-    try {
-      const result = Function(`return ${displayExpression}`)();
-      displayExpression = String(result % 1 !== 0 ? parseFloat(result.toFixed(8)) : result);
-      operator = null;
-      currentValue = null;
-      waitingForOperand = false;
-      updateDisplay();
-    } catch {
-      alert('Geçersiz ifade');
-    }
-  }
-
 function clearAll() {
-  currentInput = '0';
-  operator = null;
-  previousInput = null;
-  waitingForOperand = false;
+  displayExpression = '0';
   updateDisplay();
 }
 
 function deleteLast() {
-  if (waitingForOperand) return;
-  if (currentInput.length > 1) currentInput = currentInput.slice(0, -1);
-  else currentInput = '0';
+  if (displayExpression.length > 1) {
+    displayExpression = displayExpression.slice(0, -1);
+  } else {
+    displayExpression = '0';
+  }
   updateDisplay();
 }
 
 function appendToDisplay(value) {
-    const ops = ['+', '-', '*', '/'];
-  
-    // Operatör
-    if (ops.includes(value)) {
-      if (operator && waitingForOperand) {
-        displayExpression = displayExpression.slice(0, -1) + value;
-        operator = value;
-        updateDisplay();
-        return;
-      }
-      currentValue = parseFloat(displayExpression);
-      operator = value;
-      displayExpression += value;
-      waitingForOperand = false;
-      updateDisplay();
-      return;
-    }
-  
-    if (value === '.') {
-      const parts = displayExpression.split(/[+\-*/]/);
-      const lastPart = parts[parts.length - 1];
-      if (!lastPart.includes('.')) {
-        displayExpression += '.';
-        updateDisplay();
-      }
-      return;
-    }
-  
-    if (displayExpression === '0' && value !== '.') {
-      displayExpression = value;
+  if (isOperator(value)) {
+    if (displayExpression === '0') return;
+
+    if (lastTokenIsOperator(displayExpression)) {
+      displayExpression = displayExpression.slice(0, -1) + value;
     } else {
       displayExpression += value;
     }
     updateDisplay();
+    return;
   }
 
+  if (value === '.') {
+    const lastNum = getLastNumberChunk(displayExpression);
+    if (!lastNum.includes('.')) {
+      if (displayExpression === '0') {
+        displayExpression = '0.';
+      } else {
+        displayExpression += '.';
+      }
+      updateDisplay();
+    }
+    return;
+  }
+
+  // Sayı ise
+  if (displayExpression === '0') {
+    displayExpression = value;
+  } else {
+    displayExpression += value;
+  }
+  updateDisplay();
+}
+
+function calculate() {
+  try {
+    let expr = displayExpression;
+    while (expr.length && isOperator(expr[expr.length - 1])) {
+      expr = expr.slice(0, -1);
+    }
+    if (!expr.length) expr = '0';
+
+    const result = Function(`return (${expr})`)();
+    const normalized =
+      typeof result === 'number' && isFinite(result)
+        ? (result % 1 !== 0 ? parseFloat(result.toFixed(8)) : result)
+        : 0;
+
+    displayExpression = String(normalized);
+    updateDisplay();
+  } catch {
+    alert('Geçersiz ifade');
+  }
+}
+
 function memoryStore() {
-  const val = parseFloat(currentInput);
+  const val = parseFloat(displayExpression);
   if (isNaN(val)) return;
-  memory.unshift(Number((val % 1 !== 0 ? parseFloat(val.toFixed(8)) : val)));
+  memory.unshift(Number(val % 1 !== 0 ? parseFloat(val.toFixed(8)) : val));
   saveMemory();
 }
 
 function memoryRecall() {
   if (!memory.length) return;
-  currentInput = String(memory[0]);
-  waitingForOperand = false;
+  displayExpression = String(memory[0]);
   updateDisplay();
 }
 
 function memoryAdd() {
-  const val = parseFloat(currentInput);
+  const val = parseFloat(displayExpression);
   if (isNaN(val)) return;
 
   if (!memory.length) {
@@ -195,7 +177,7 @@ function memoryAdd() {
 }
 
 function memorySubtract() {
-  const val = parseFloat(currentInput);
+  const val = parseFloat(displayExpression);
   if (isNaN(val)) return;
 
   if (!memory.length) {
@@ -217,9 +199,15 @@ document.addEventListener('keydown', (e) => {
   if ((k >= '0' && k <= '9') || k === '.') appendToDisplay(k);
   if (['+', '-', '*', '/'].includes(k)) appendToDisplay(k);
 
-  if (k === 'Enter' || k === '=') { e.preventDefault(); calculate(); }
+  if (k === 'Enter' || k === '=') {
+    e.preventDefault();
+    calculate();
+  }
   if (k === 'Escape' || k.toLowerCase() === 'c') clearAll();
-  if (k === 'Backspace') { e.preventDefault(); deleteLast(); }
+  if (k === 'Backspace') {
+    e.preventDefault();
+    deleteLast();
+  }
 
   if (k.toLowerCase() === 'm') memoryStore();
   if (k.toLowerCase() === 'r') memoryRecall();
