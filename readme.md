@@ -30,3 +30,12 @@ Her proje kendi klasörü içinde bulunur ve ayrı çalıştırılabilir.
 - Seçilen iki para birimi arasında dönüşüm yapar.
 - **Kullanılan Teknolojiler:** HTML, CSS (Tailwind), JavaScript, ExchangeRate API
 - 🔗 **Canlı Demo:** <a href="https://buraksanck.github.io/web-dev-projects/exchange-currency/index.html">Canlı Demo</a>
+
+### 5) QR Code Generator & Reader
+- Metin veya bağlantıyı QR koda dönüştürür.
+- PNG formatında QR kodu indirme desteği.
+- Kamera ile gerçek zamanlı QR kod okuma.
+- Görsel yükleyerek QR kod çözme.
+- Okunan veriyi kopyalama ve temizleme özellikleri.
+- **Kullanılan Teknolojiler:** HTML, CSS (Tailwind), JavaScript, [qrcodejs](https://github.com/davidshimjs/qrcodejs), [jsQR](https://github.com/cozmo/jsQR)  
+- 🔗 **Canlı Demo:** <a href="https://buraksanck.github.io/web-dev-projects/qr-code-generator/index.html">Canlı Demo</a>
