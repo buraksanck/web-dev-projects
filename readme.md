@@ -15,4 +15,4 @@ Her proje kendi klasörü içinde bulunur ve ayrı çalıştırılabilir.
 - **Hafıza İşlemleri:** `MC`, `MR`, `M+`, `M-`  
 - **Diğerleri:** `C`, `CE`, `±`, `.` , son işlemi silme (⌫)
 - **Kullanılan Teknolojiler:** HTML, CSS, JavaScript
-- 🔗 **Canlı Demo:** <a href="https://buraksanck.github.io/web-dev-projects/calculator/index.html">Canlı Demo</a>"
+- 🔗 **Canlı Demo:** <a href="https://buraksanck.github.io/web-dev-projects/calculator/index.html">Canlı Demo</a>
