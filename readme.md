@@ -47,3 +47,9 @@ Her proje kendi klasörü içinde bulunur ve ayrı çalıştırılabilir.
 - Kaydırma/çarpışma animasyonları; **kazandın/kaybettin** durum mesajları.
 - **Kullanılan Teknolojiler:** HTML, CSS (Tailwind), JavaScript  
 - 🔗 **Canlı Demo:** <a href="https://buraksanck.github.io/web-dev-projects/2048/index.html">Canlı Demo</a>
+
+### 7) Catering Landing Page
+- Modern, responsive ve animasyonlu tanıtım sayfası.
+- **Özellikler:** Mobil uyumlu menü, promosyon slider, paket fiyat listesi, iletişim formu, sık sorulan sorular bölümü, hover/scroll animasyonları.
+- **Kullanılan Teknolojiler:** HTML, CSS (Tailwind), JavaScript
+- 🔗 **Canlı Demo:** [Canlı Demo](https://buraksanck.github.io/web-dev-projects/catering-landing-page/index.html)
