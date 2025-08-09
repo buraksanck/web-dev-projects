@@ -1,0 +1,760 @@
+<!doctype html>
+<html lang="tr" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Catering Hizmetleri | Menü ve Paketler</title>
+    <meta name="description" content="Düğün, davet ve kurumsal etkinlikler için profesyonel catering. Taze malzemelerle hazırlanan menüler, esnek paketler ve hızlı teslimat." />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                50: '#fff7ed',
+                100: '#ffedd5',
+                200: '#fed7aa',
+                300: '#fdba74',
+                400: '#fb923c',
+                500: '#f97316',
+                600: '#ea580c',
+                700: '#c2410c',
+                800: '#9a3412',
+                900: '#7c2d12'
+              }
+            },
+            keyframes: {
+              blob: {
+                '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                '33%': { transform: 'translate(20px, -30px) scale(1.05)' },
+                '66%': { transform: 'translate(-10px, 15px) scale(0.97)' },
+                '100%': { transform: 'translate(0px, 0px) scale(1)' }
+              },
+              float: {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-10px)' }
+              },
+              gradient: {
+                '0%': { backgroundPosition: '0% 50%' },
+                '100%': { backgroundPosition: '200% 50%' }
+              },
+              marquee: {
+                '0%': { transform: 'translateX(0)' },
+                '100%': { transform: 'translateX(-50%)' }
+              }
+            },
+            animation: {
+              blob: 'blob 18s ease-in-out infinite',
+              float: 'float 6s ease-in-out infinite',
+              gradient: 'gradient 8s ease-in-out infinite',
+              marquee: 'marquee 25s linear infinite'
+            }
+          }
+        }
+      }
+    </script>
+  </head>
+
+  <body class="min-h-screen bg-white text-slate-800">
+    <div class="bg-primary-600 text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-8 flex items-center justify-between text-xs">
+        <div class="flex items-center gap-4">
+          <a href="tel:+908500000000" class="hover:underline">0 850 000 00 00</a>
+          <a href="mailto:info@lezzetcatering.com" class="hover:underline">info@lezzetcatering.com</a>
+        </div>
+        <div class="flex items-center gap-4">
+          <a href="#contact" class="hover:underline">İletişim</a>
+          <a href="#faq" class="hover:underline">S.S.S.</a>
+          <a href="#pricing" class="hover:underline">Paketler</a>
+        </div>
+      </div>
+    </div>
+    <header class="sticky top-0 z-40 backdrop-blur bg-white/70 border-b border-slate-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <a href="#hero" class="font-semibold text-xl tracking-tight">Lezzet Catering</a>
+        <nav class="hidden sm:flex items-center gap-6 text-sm">
+          <a href="#features" class="hover:text-primary-600">Hizmetler</a>
+          <a href="#pricing" class="hover:text-primary-600">Paketler</a>
+          <a href="#contact" class="hover:text-primary-600">İletişim</a>
+        </nav>
+        <div class="flex items-center gap-3">
+          <a href="#pricing" class="hidden sm:inline-flex items-center gap-2 rounded-md bg-primary-600 text-white px-4 py-2 text-sm font-medium shadow hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-400">
+            Hemen Başla
+          </a>
+          <button id="mobileMenuBtn" aria-controls="mobileMenu" aria-expanded="false" class="sm:hidden inline-flex items-center justify-center rounded-md p-2 text-slate-700 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-primary-400">
+            <svg id="iconOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+            <svg id="iconClose" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+    <div id="spotlight" class="fixed inset-0 z-20 pointer-events-none"></div>
+    <div id="promoBar" class="bg-primary-600 text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-center overflow-hidden relative">
+        <div class="flex items-center gap-3 sm:gap-5">
+          <img id="promoImg" src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=640&auto=format&fit=crop" alt="kampanya" class="hidden sm:block h-10 w-10 rounded-lg object-cover ring-1 ring-white/20" />
+          <div class="text-center sm:text-left">
+            <div id="promoTitle" class="text-sm sm:text-base font-semibold opacity-100 transition-opacity duration-300">Kampanya: Bu ay düğün paketlerinde %10 indirim</div>
+            <div id="promoSubtitle" class="hidden sm:block text-xs text-white/90 opacity-100 transition-opacity duration-300">Şimdi teklif al, tarihimizi ayırt</div>
+          </div>
+          <a id="promoCTA" href="#pricing" class="hidden sm:inline-flex items-center justify-center rounded-md bg-white/10 text-white px-3 py-1.5 text-xs font-medium hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white/40">Göz at</a>
+        </div>
+        <button id="promoPrev" aria-label="Önceki" class="absolute left-2 sm:left-0 top-1/2 -translate-y-1/2 inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/10 hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white/40">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path fill-rule="evenodd" d="M14.53 5.47a.75.75 0 010 1.06L9.56 11.5l4.97 4.97a.75.75 0 11-1.06 1.06l-5.5-5.5a.75.75 0 010-1.06l5.5-5.5a.75.75 0 011.06 0z" clip-rule="evenodd"/></svg>
+        </button>
+        <button id="promoNext" aria-label="Sonraki" class="absolute right-2 sm:right-0 top-1/2 -translate-y-1/2 inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/10 hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white/40">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path fill-rule="evenodd" d="M9.47 5.47a.75.75 0 000 1.06L14.44 11.5 9.47 16.47a.75.75 0 101.06 1.06l5.5-5.5a.75.75 0 000-1.06l-5.5-5.5a.75.75 0 00-1.06 0z" clip-rule="evenodd"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div id="mobileOverlay" class="fixed inset-0 z-30 bg-black/40 hidden"></div>
+    <div id="mobileMenu" class="sm:hidden fixed top-24 inset-x-0 z-40 origin-top scale-95 opacity-0 pointer-events-none transition-all duration-200">
+      <div class="mx-4 rounded-xl border border-slate-200 bg-white shadow-lg overflow-hidden">
+        <nav class="flex flex-col p-3 text-sm">
+          <a href="#features" class="px-3 py-2 rounded-md hover:bg-slate-50">Hizmetler</a>
+          <a href="#pricing" class="px-3 py-2 rounded-md hover:bg-slate-50">Paketler</a>
+          <a href="#contact" class="px-3 py-2 rounded-md hover:bg-slate-50">İletişim</a>
+          <a href="#pricing" class="mt-2 inline-flex items-center justify-center rounded-md bg-primary-600 text-white px-4 py-2 font-medium hover:bg-primary-700">Hemen Başla</a>
+        </nav>
+      </div>
+    </div>
+
+    <section id="hero" class="relative overflow-hidden">
+      <div class="absolute inset-0 -z-10 bg-gradient-to-br from-primary-50 via-white to-slate-50"></div>
+      <div aria-hidden="true" class="pointer-events-none absolute -top-24 -right-12 h-80 w-80 rounded-full bg-primary-400/30 blur-3xl animate-blob"></div>
+      <div aria-hidden="true" class="pointer-events-none absolute -bottom-24 -left-12 h-80 w-80 rounded-full bg-indigo-300/30 blur-3xl animate-blob" style="animation-delay: -6s"></div>
+      <div aria-hidden="true" class="pointer-events-none absolute top-1/3 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full bg-purple-300/30 blur-3xl animate-blob" style="animation-delay: -12s"></div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28">
+        <div class="grid lg:grid-cols-2 gap-10 items-center">
+          <div>
+            <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-transparent bg-clip-text bg-[linear-gradient(90deg,#0f172a,#f97316,#ef4444,#0f172a)] bg-[length:200%_100%] animate-gradient">
+              Etkinliklerinize şef dokunuşu
+            </h1>
+            <p class="mt-5 text-lg text-slate-600">
+              Düğün, davet, toplantı ve kurumsal etkinlikler için taze, sıcak ve zamanında servis. Menüleri damak tadınıza göre özelleştirelim.
+            </p>
+            <div class="mt-8 flex flex-col sm:flex-row gap-3">
+              <a href="#pricing" class="group relative inline-flex items-center justify-center rounded-md bg-primary-600 text-white px-6 py-3 text-base font-medium shadow hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-400">
+                <span class="absolute inset-0 rounded-md opacity-0 group-hover:opacity-100 transition-opacity" style="background: conic-gradient(from 0deg, rgba(249,115,22,.4), transparent 30%, rgba(244,63,94,.4), transparent 60%, rgba(249,115,22,.4)); filter: blur(10px);"></span>
+                Paketleri Gör
+              </a>
+              <a href="#features" class="inline-flex items-center justify-center rounded-md border border-slate-300 text-slate-700 px-6 py-3 text-base font-medium hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-primary-200">
+                Hizmetler
+              </a>
+            </div>
+          </div>
+          <div class="relative">
+            <div class="hidden sm:grid grid-cols-2 gap-3">
+              <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?q=80&w=1200&auto=format&fit=crop" alt="Gurme sunum" class="h-48 md:h-56 w-full object-cover rounded-xl shadow-lg" />
+              <img src="https://images.unsplash.com/photo-1546069901-eacef0df6022?q=80&w=1200&auto=format&fit=crop" alt="Sıcak ana yemek" class="h-48 md:h-56 w-full object-cover rounded-xl shadow-lg" />
+              <img src="https://images.unsplash.com/photo-1498654896293-37aacf113fd9?q=80&w=1200&auto=format&fit=crop" alt="Tatlı ve meyveler" class="col-span-2 h-40 md:h-48 w-full object-cover rounded-xl shadow-lg" />
+            </div>
+            <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?q=80&w=1200&auto=format&fit=crop" alt="Gurme sunum" class="sm:hidden aspect-[16/10] w-full object-cover rounded-2xl shadow-2xl" />
+
+            <div class="absolute -inset-3 -z-10 rounded-3xl bg-gradient-to-br from-primary-200/50 via-transparent to-primary-100/60 blur-2xl"></div>
+
+            <div class="absolute left-3 bottom-3 sm:left-4 sm:bottom-4 inline-flex items-center gap-2 rounded-xl bg-white/90 backdrop-blur px-3 py-2 text-xs sm:text-sm font-medium text-slate-700 shadow-lg ring-1 ring-slate-900/5">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-amber-500"><path d="M11.48 3.499a.562.562 0 011.04 0l2.07 5.02a.563.563 0 00.475.345l5.404.396c.499.037.701.663.321.988l-4.117 3.527a.563.563 0 00-.182.557l1.257 5.273a.562.562 0 01-.84.61l-4.646-2.69a.563.563 0 00-.586 0l-4.646 2.69a.562.562 0 01-.84-.61l1.257-5.273a.563.563 0 00-.182-.557L3.21 10.248a.563.563 0 01.321-.988l5.405-.396a.563.563 0 00.474-.345l2.07-5.02z"/></svg>
+              4.9/5 · 350+ yorum
+            </div>
+            <div class="absolute right-3 top-3 sm:right-4 sm:top-4 rounded-full bg-primary-600 text-white text-[10px] sm:text-xs font-semibold px-3 py-1 shadow-lg animate-float">Günün Menüsü</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="features" class="py-16 sm:py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="p-6 rounded-xl border border-slate-200 bg-white shadow-sm reveal-on-scroll opacity-0 translate-y-4 transition-all duration-700 tilt">
+            <h3 class="font-semibold text-lg">Etkinlik Catering</h3>
+            <p class="mt-2 text-slate-600">Düğün, nişan, mezuniyet ve özel davetlerde baştan sona planlama ve servis.</p>
+          </div>
+          <div class="p-6 rounded-xl border border-slate-200 bg-white shadow-sm reveal-on-scroll opacity-0 translate-y-4 transition-all duration-700 [transition-delay:150ms] tilt">
+            <h3 class="font-semibold text-lg">Kurumsal Menü</h3>
+            <p class="mt-2 text-slate-600">Toplantı, seminer ve lansmanlar için sıcak-soğuk ikramlar ve kahve molası düzeni.</p>
+          </div>
+          <div class="p-6 rounded-xl border border-slate-200 bg-white shadow-sm reveal-on-scroll opacity-0 translate-y-4 transition-all duration-700 [transition-delay:300ms] tilt">
+            <h3 class="font-semibold text-lg">Günlük Yemek</h3>
+            <p class="mt-2 text-slate-600">Ofis ve üretim tesislerine günlük taze menüler, diyet ve vejetaryen seçenekleri.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing" class="py-16 sm:py-20 bg-slate-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto">
+          <h2 class="text-3xl sm:text-4xl font-bold text-slate-900">Catering Paketleri</h2>
+          <p class="mt-3 text-slate-600">Etkinlik türünüze uygun paketleri seçin, kişi sayısına göre esnetin.</p>
+        </div>
+
+        <div class="mt-6 flex items-center justify-center gap-4">
+          <span class="text-sm text-slate-600">Kişi Başı</span>
+          <div class="relative inline-flex h-7 items-center rounded-full bg-slate-200 px-1 text-xs text-slate-700">
+            <span class="inline-flex h-5 items-center rounded-full bg-white px-2 font-medium shadow">Paket</span>
+            <span class="px-2">Menü</span>
+          </div>
+          <span class="text-sm text-slate-600 flex items-center gap-2">Toplu Sipariş <span class="hidden sm:inline-block rounded-full bg-green-100 text-green-700 text-xs px-2 py-0.5">İndirim</span></span>
+        </div>
+
+        <div class="mt-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8">
+          <div class="flex flex-col rounded-2xl border border-slate-200 bg-white shadow-sm reveal-on-scroll opacity-0 translate-y-4 transition-all duration-700 tilt overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1543353071-10c8ba85a904?q=80&w=1600&auto=format&fit=crop" alt="Atıştırmalık tabaklar" class="h-40 w-full object-cover" />
+            <div class="p-6">
+              <h3 class="text-lg font-semibold">Atıştırmalık</h3>
+              <p class="mt-1 text-sm text-slate-600">Mini kanepeler, tatlı-tuzlu mix, sıcak içecek</p>
+              <div class="mt-4 flex items-end gap-2">
+                <span class="text-4xl font-extrabold text-slate-900">₺149</span>
+                <span class="text-slate-500 mb-1">/kişi</span>
+              </div>
+              <ul class="mt-6 space-y-3 text-sm text-slate-700">
+                <li>10 çeşit kanape</li>
+                <li>2 sıcak içecek</li>
+                <li>Servis personeli</li>
+              </ul>
+              <a href="#contact" class="mt-6 inline-flex w-full items-center justify-center rounded-md border border-slate-300 px-4 py-2.5 text-sm font-medium text-slate-800 hover:bg-slate-50">Teklif Al</a>
+            </div>
+          </div>
+
+          <div class="relative flex flex-col rounded-2xl border-2 border-primary-600 bg-white shadow-lg reveal-on-scroll opacity-0 translate-y-4 transition-all duration-700 tilt overflow-hidden">
+            <div class="absolute -top-3 left-[60%] -translate-x-1/2 z-10">
+              <span class="inline-block rounded-full bg-primary-600 text-white text-xs font-semibold px-3 py-1 shadow">En Popüler</span>
+            </div>
+            <img src="https://images.unsplash.com/photo-1547592180-85f173990554?q=80&w=1600&auto=format&fit=crop" alt="Klasik menü tabakları" class="h-40 w-full object-cover" />
+            <div class="p-6">
+              <h3 class="text-lg font-semibold">Klasik Menü</h3>
+              <p class="mt-1 text-sm text-slate-600">Ana yemek, salata, tatlı ve içecek</p>
+              <div class="mt-4 flex items-end gap-2">
+                <span class="text-4xl font-extrabold text-slate-900">₺299</span>
+                <span class="text-slate-500 mb-1">/kişi</span>
+              </div>
+              <ul class="mt-6 space-y-3 text-sm text-slate-700">
+                <li>2 ana yemek seçeneği</li>
+                <li>Mevsim salatası</li>
+                <li>Günlük tatlı</li>
+              </ul>
+              <a href="#contact" class="mt-6 inline-flex w-full items-center justify-center rounded-md bg-primary-600 px-4 py-2.5 text-sm font-medium text-white hover:bg-primary-700">Teklif Al</a>
+            </div>
+          </div>
+
+          <div class="flex flex-col rounded-2xl border border-slate-200 bg-white shadow-sm reveal-on-scroll opacity-0 translate-y-4 transition-all duration-700 tilt overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1600&auto=format&fit=crop" alt="Gurme canlı istasyon" class="h-40 w-full object-cover" />
+            <div class="p-6">
+              <h3 class="text-lg font-semibold">Gourmet</h3>
+              <p class="mt-1 text-sm text-slate-600">Canlı istasyonlar ve şef sunumu</p>
+              <div class="mt-4 flex items-end gap-2">
+                <span class="text-4xl font-extrabold text-slate-900">₺549</span>
+                <span class="text-slate-500 mb-1">/kişi</span>
+              </div>
+              <ul class="mt-6 space-y-3 text-sm text-slate-700">
+                <li>Canlı istasyon (pastane/ızgara)</li>
+                <li>Şef eşliğinde sunum</li>
+                <li>Premium servis</li>
+              </ul>
+              <a href="#contact" class="mt-6 inline-flex w-full items-center justify-center rounded-md border border-slate-300 px-4 py-2.5 text-sm font-medium text-slate-800 hover:bg-slate-50">Etkinliğini Planla</a>
+            </div>
+          </div>
+
+          <div class="flex flex-col rounded-2xl border border-slate-200 bg-white shadow-sm reveal-on-scroll opacity-0 translate-y-4 transition-all duration-700 tilt overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1529042410759-befb1204b468?q=80&w=1600&auto=format&fit=crop" alt="Brunch büfesi" class="h-40 w-full object-cover" />
+            <div class="p-6">
+              <h3 class="text-lg font-semibold">Brunch</h3>
+              <p class="mt-1 text-sm text-slate-600">Açık büfe kahvaltı, taze meyve ve içecekler</p>
+              <div class="mt-4 flex items-end gap-2">
+                <span class="text-4xl font-extrabold text-slate-900">₺229</span>
+                <span class="text-slate-500 mb-1">/kişi</span>
+              </div>
+              <ul class="mt-6 space-y-3 text-sm text-slate-700">
+                <li>Sıcak-soğuk kahvaltı seçenekleri</li>
+                <li>Taze meyve ve tatlı</li>
+                <li>Sınırsız çay/kahve</li>
+              </ul>
+              <a href="#contact" class="mt-6 inline-flex w-full items-center justify-center rounded-md border border-slate-300 px-4 py-2.5 text-sm font-medium text-slate-800 hover:bg-slate-50">Teklif Al</a>
+            </div>
+          </div>
+
+          <div class="flex flex-col rounded-2xl border border-slate-200 bg-white shadow-sm reveal-on-scroll opacity-0 translate-y-4 transition-all duration-700 tilt overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?q=80&w=1600&auto=format&fit=crop" alt="Ofis öğle menüsü" class="h-40 w-full object-cover" />
+            <div class="p-6">
+              <h3 class="text-lg font-semibold">Ofis Öğle</h3>
+              <p class="mt-1 text-sm text-slate-600">Günlük sıcak menü, diyet seçenekleri</p>
+              <div class="mt-4 flex items-end gap-2">
+                <span class="text-4xl font-extrabold text-slate-900">₺179</span>
+                <span class="text-slate-500 mb-1">/kişi</span>
+              </div>
+              <ul class="mt-6 space-y-3 text-sm text-slate-700">
+                <li>3 kap sıcak menü</li>
+                <li>Vejetaryen/diyet menü</li>
+                <li>Günlük teslimat</li>
+              </ul>
+              <a href="#contact" class="mt-6 inline-flex w-full items-center justify-center rounded-md border border-slate-300 px-4 py-2.5 text-sm font-medium text-slate-800 hover:bg-slate-50">Teklif Al</a>
+            </div>
+          </div>
+
+          <div class="flex flex-col rounded-2xl border-2 border-primary-600 bg-white shadow-lg reveal-on-scroll opacity-0 translate-y-4 transition-all duration-700 tilt overflow-hidden">
+            <img src="https://kervanorganizasyon.com/uploads/contents/gallery/dugun-catering-1298.jpeg" alt="Düğün resepsiyonu menüsü" class="h-40 w-full object-cover" />
+            <div class="p-6">
+              <h3 class="text-lg font-semibold">Düğün Paketi</h3>
+              <p class="mt-1 text-sm text-slate-600">Karşılama kokteyli, ana yemek, tatlı ve canlı istasyon</p>
+              <div class="mt-4 flex items-end gap-2">
+                <span class="text-4xl font-extrabold text-slate-900">₺699</span>
+                <span class="text-slate-500 mb-1">/kişi</span>
+              </div>
+              <ul class="mt-6 space-y-3 text-sm text-slate-700">
+                <li>Hoş geldin kokteyli</li>
+                <li>3 çeşit ana yemek</li>
+                <li>Canlı istasyon</li>
+              </ul>
+              <a href="#contact" class="mt-6 inline-flex w-full items-center justify-center rounded-md bg-primary-600 px-4 py-2.5 text-sm font-medium text-white hover:bg-primary-700">Tarih Sor</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="py-16 sm:py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto">
+          <h3 class="text-3xl sm:text-4xl font-bold text-slate-900">İletişime Geçin</h3>
+          <p class="mt-3 text-slate-600">Formu doldurun, en geç 24 saat içinde size dönüş yapalım.</p>
+        </div>
+
+        <div class="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+          <div class="reveal-on-scroll opacity-0 translate-y-4 transition-all duration-700">
+            <div class="h-full rounded-2xl border border-slate-200 bg-white shadow-sm p-6 sm:p-8">
+              <div id="contactSuccess" class="hidden mb-4 rounded-md border border-green-200 bg-green-50 p-3 text-sm text-green-800 flex items-start justify-between gap-3" role="status" aria-live="polite">
+                <div>
+                  <strong>Teşekkürler!</strong> Mesajınız alındı. En kısa sürede dönüş yapacağız.
+                </div>
+                <button type="button" id="contactSuccessClose" class="shrink-0 rounded p-1 text-green-700 hover:bg-green-100" aria-label="Kapat">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg>
+                </button>
+              </div>
+
+              <form id="contactForm" class="space-y-5" novalidate>
+                <div class="grid sm:grid-cols-2 gap-5">
+                  <div>
+                    <label for="name" class="block text-sm font-medium text-slate-700">Ad Soyad</label>
+                    <input id="name" name="name" type="text" required placeholder="Adınız Soyadınız" class="mt-1 block w-full rounded-md border-slate-300 focus:border-primary-500 focus:ring-primary-500 px-4 py-3" />
+                  </div>
+                  <div>
+                    <label for="email" class="block text-sm font-medium text-slate-700">E‑posta</label>
+                    <input id="email" name="email" type="email" required placeholder="ornek@eposta.com" class="mt-1 block w-full rounded-md border-slate-300 focus:border-primary-500 focus:ring-primary-500 px-4 py-3" />
+                  </div>
+                </div>
+                <div class="grid sm:grid-cols-2 gap-5">
+                  <div>
+                    <label for="phone" class="block text-sm font-medium text-slate-700">Telefon (opsiyonel)</label>
+                    <input id="phone" name="phone" type="tel" placeholder="05xx xxx xx xx" class="mt-1 block w-full rounded-md border-slate-300 focus:border-primary-500 focus:ring-primary-500 px-4 py-3" />
+                  </div>
+                  <div>
+                    <label for="subject" class="block text-sm font-medium text-slate-700">Konu</label>
+                    <input id="subject" name="subject" type="text" required placeholder="Kısa konu başlığı" class="mt-1 block w-full rounded-md border-slate-300 focus:border-primary-500 focus:ring-primary-500 px-4 py-3" />
+                  </div>
+                </div>
+                <div>
+                  <label for="message" class="block text-sm font-medium text-slate-700">Mesajınız</label>
+                  <textarea id="message" name="message" rows="5" required placeholder="Bize nasıl yardımcı olabiliriz?" class="mt-1 block w-full rounded-md border-slate-300 focus:border-primary-500 focus:ring-primary-500 px-4 py-3"></textarea>
+                </div>
+                <div class="flex items-start gap-3">
+                  <input id="kvkk" name="kvkk" type="checkbox" required class="mt-1 h-4 w-4 rounded border-slate-300 text-primary-600 focus:ring-primary-500" />
+                  <label for="kvkk" class="text-sm text-slate-600">Kişisel verilerimin <a href="#" class="underline hover:text-primary-600">gizlilik politikası</a> kapsamında işlenmesini kabul ediyorum.</label>
+                </div>
+                <div class="pt-2">
+                  <button id="contactSubmit" type="submit" class="inline-flex items-center justify-center rounded-md bg-primary-600 text-white px-5 py-2.5 text-sm font-medium shadow hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-400">
+                    Gönder
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div class="reveal-on-scroll opacity-0 translate-y-4 transition-all duration-700 [transition-delay:150ms]">
+            <div class="relative h-80 sm:h-full min-h-[20rem] rounded-2xl overflow-hidden shadow-2xl">
+              <img src="https://images.unsplash.com/photo-1525182008055-f88b95ff7980?q=80&w=1600&auto=format&fit=crop" alt="Ekip çalışması ve iletişim" class="absolute inset-0 h-full w-full object-cover" />
+              <div class="absolute inset-0 bg-gradient-to-tr from-primary-900/20 via-primary-600/10 to-transparent mix-blend-normal"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="py-16 sm:py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto">
+          <h2 class="text-3xl sm:text-4xl font-bold text-slate-900">Sık Sorulan Sorular</h2>
+          <p class="mt-3 text-slate-600">Aklınızdakiler için hızlı cevaplar</p>
+        </div>
+        <div class="mt-10 max-w-3xl mx-auto space-y-4">
+          <div class="reveal-on-scroll opacity-0 translate-y-4 transition-all duration-700">
+            <button type="button" class="w-full flex items-center justify-between rounded-xl border border-slate-200 bg-white px-5 py-4 text-left shadow-sm hover:border-primary-300 focus:outline-none focus:ring-2 focus:ring-primary-400" aria-expanded="false" aria-controls="faq-1" data-accordion-button>
+              <span class="font-medium text-slate-900">Hangi şehirlerde hizmet veriyorsunuz?</span>
+              <svg class="h-5 w-5 text-slate-500 transition-transform" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.126l3.71-3.896a.75.75 0 111.08 1.04l-4.24 4.456a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+            </button>
+            <div id="faq-1" class="hidden px-5 pt-3 text-slate-600">İstanbul ve çevre illerde tam kapsamlı; talebe göre Türkiye geneli çözüm ortaklarımızla hizmet veriyoruz.</div>
+          </div>
+
+          <div class="reveal-on-scroll opacity-0 translate-y-4 transition-all duration-700 [transition-delay:100ms]">
+            <button type="button" class="w-full flex items-center justify-between rounded-xl border border-slate-200 bg-white px-5 py-4 text-left shadow-sm hover:border-primary-300 focus:outline-none focus:ring-2 focus:ring-primary-400" aria-expanded="false" aria-controls="faq-2" data-accordion-button>
+              <span class="font-medium text-slate-900">Minimum kişi sayısı var mı?</span>
+              <svg class="h-5 w-5 text-slate-500 transition-transform" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.126l3.71-3.896a.75.75 0 111.08 1.04l-4.24 4.456a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+            </button>
+            <div id="faq-2" class="hidden px-5 pt-3 text-slate-600">Paketlere göre değişir. Genellikle 20 kişiden itibaren çalışıyoruz; özel durumlar için esneğiz.</div>
+          </div>
+
+          <div class="reveal-on-scroll opacity-0 translate-y-4 transition-all duration-700 [transition-delay:200ms]">
+            <button type="button" class="w-full flex items-center justify-between rounded-xl border border-slate-200 bg-white px-5 py-4 text-left shadow-sm hover:border-primary-300 focus:outline-none focus:ring-2 focus:ring-primary-400" aria-expanded="false" aria-controls="faq-3" data-accordion-button>
+              <span class="font-medium text-slate-900">Vegan, glütensiz veya alerjen hassasiyetlerine uygun menü yapıyor musunuz?</span>
+              <svg class="h-5 w-5 text-slate-500 transition-transform" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.126l3.71-3.896a.75.75 0 111.08 1.04l-4.24 4.456a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+            </button>
+            <div id="faq-3" class="hidden px-5 pt-3 text-slate-600">Evet. Vegan/vejetaryen, glütensiz ve diğer alerjen hassasiyetlerine uygun alternatifler sunuyoruz.</div>
+          </div>
+
+          <div class="reveal-on-scroll opacity-0 translate-y-4 transition-all duration-700 [transition-delay:300ms]">
+            <button type="button" class="w-full flex items-center justify-between rounded-xl border border-slate-200 bg-white px-5 py-4 text-left shadow-sm hover:border-primary-300 focus:outline-none focus:ring-2 focus:ring-primary-400" aria-expanded="false" aria-controls="faq-4" data-accordion-button>
+              <span class="font-medium text-slate-900">Masa, sandalye ve ekipman temini yapıyor musunuz?</span>
+              <svg class="h-5 w-5 text-slate-500 transition-transform" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.126l3.71-3.896a.75.75 0 111.08 1.04l-4.24 4.456a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+            </button>
+            <div id="faq-4" class="hidden px-5 pt-3 text-slate-600">İhtiyaç halinde masa-sandalye, servis ekipmanları ve dekorasyon için çözüm ortaklarımızla destek sağlıyoruz.</div>
+          </div>
+
+          <div class="reveal-on-scroll opacity-0 translate-y-4 transition-all duration-700 [transition-delay:400ms]">
+            <button type="button" class="w-full flex items-center justify-between rounded-xl border border-slate-200 bg-white px-5 py-4 text-left shadow-sm hover:border-primary-300 focus:outline-none focus:ring-2 focus:ring-primary-400" aria-expanded="false" aria-controls="faq-5" data-accordion-button>
+              <span class="font-medium text-slate-900">Rezervasyonu ne kadar önce yapmalıyım?</span>
+              <svg class="h-5 w-5 text-slate-500 transition-transform" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.126l3.71-3.896a.75.75 0 111.08 1.04l-4.24 4.456a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+            </button>
+            <div id="faq-5" class="hidden px-5 pt-3 text-slate-600">Yoğun sezonlarda 3-4 hafta öncesi ideal. Müsaitlik durumuna göre daha kısa sürede de çözüm üretiriz.</div>
+          </div>
+
+          <div class="reveal-on-scroll opacity-0 translate-y-4 transition-all duration-700 [transition-delay:500ms]">
+            <button type="button" class="w-full flex items-center justify-between rounded-xl border border-slate-200 bg-white px-5 py-4 text-left shadow-sm hover:border-primary-300 focus:outline-none focus:ring-2 focus:ring-primary-400" aria-expanded="false" aria-controls="faq-6" data-accordion-button>
+              <span class="font-medium text-slate-900">İptal/iade koşulları nedir?</span>
+              <svg class="h-5 w-5 text-slate-500 transition-transform" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.126l3.71-3.896a.75.75 0 111.08 1.04l-4.24 4.456a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+            </button>
+            <div id="faq-6" class="hidden px-5 pt-3 text-slate-600">Etkinlik tarihinden 7 gün öncesine kadar ücretsiz değişiklik. Daha yakın iptallerde paket bazlı koşullar geçerlidir.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="border-t border-slate-200 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+          <div>
+            <div class="text-xl font-semibold text-slate-900">Lezzet Catering</div>
+            <p class="mt-3 text-sm text-slate-600">Etkinlikleriniz için taze, sıcak ve zamanında servis. Menüleri damak tadınıza göre şekillendiriyoruz.</p>
+            <div class="mt-4 flex items-center gap-4">
+              <a href="#" aria-label="Instagram" class="text-slate-500 hover:text-primary-600">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M12 2.25c-2.54 0-2.86.01-3.86.06-1 .05-1.68.2-2.28.43-.62.24-1.15.56-1.67 1.08s-.84 1.05-1.08 1.67c-.23.6-.38 1.28-.43 2.28-.05 1-.06 1.32-.06 3.86s.01 2.86.06 3.86c.05 1 .2 1.68.43 2.28.24.62.56 1.15 1.08 1.67s1.05.84 1.67 1.08c.6.23 1.28.38 2.28.43 1 .05 1.32.06 3.86.06s2.86-.01 3.86-.06c1-.05 1.68-.2 2.28-.43.62-.24 1.15-.56 1.67-1.08s.84-1.05 1.08-1.67c.23-.6.38-1.28.43-2.28.05-1 .06-1.32.06-3.86s-.01-2.86-.06-3.86c-.05-1-.2-1.68-.43-2.28a4.26 4.26 0 0 0-1.08-1.67 4.26 4.26 0 0 0-1.67-1.08c-.6-.23-1.28-.38-2.28-.43-1-.05-1.32-.06-3.86-.06Zm0 1.8c2.5 0 2.8.01 3.79.06.92.04 1.42.2 1.75.33.44.17.75.37 1.08.7.33.33.53.64.7 1.08.13.33.29.83.33 1.75.05.99.06 1.29.06 3.79s-.01 2.8-.06 3.79c-.04.92-.2 1.42-.33 1.75-.17.44-.37.75-.7 1.08-.33.33-.64.53-1.08.7-.33.13-.83.29-1.75.33-.99.05-1.29.06-3.79.06s-2.8-.01-3.79-.06c-.92-.04-1.42-.2-1.75-.33a3.03 3.03 0 0 1-1.08-.7 3.03 3.03 0 0 1-.7-1.08c-.13-.33-.29-.83-.33-1.75-.05-.99-.06-1.29-.06-3.79s.01-2.8.06-3.79c.04-.92.2-1.42.33-1.75.17-.44.37-.75.7-1.08.33-.33.64-.53 1.08-.7.33-.13.83-.29 1.75-.33.99-.05 1.29-.06 3.79-.06Zm0 3.2a6.55 6.55 0 1 0 0 13.1 6.55 6.55 0 0 0 0-13.1Zm0 10.8a4.25 4.25 0 1 1 0-8.5 4.25 4.25 0 0 1 0 8.5Zm4.84-11.86a1.53 1.53 0 1 0 0 3.06 1.53 1.53 0 0 0 0-3.06Z"/></svg>
+              </a>
+              <a href="#" aria-label="Facebook" class="text-slate-500 hover:text-primary-600">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M13.5 9H15V6h-1.5C11.57 6 10 7.57 10 9.5V11H8v3h2v7h3v-7h2.02l.48-3H13v-1.5c0-.28.22-.5.5-.5Z"/></svg>
+              </a>
+            </div>
+          </div>
+          <div>
+            <div class="text-sm font-semibold text-slate-900 uppercase tracking-wide">Hizmetler</div>
+            <ul class="mt-4 space-y-2 text-sm">
+              <li><a href="#features" class="text-slate-600 hover:text-primary-600">Etkinlik Catering</a></li>
+              <li><a href="#features" class="text-slate-600 hover:text-primary-600">Kurumsal Menü</a></li>
+              <li><a href="#features" class="text-slate-600 hover:text-primary-600">Günlük Yemek</a></li>
+            </ul>
+          </div>
+          <div>
+            <div class="text-sm font-semibold text-slate-900 uppercase tracking-wide">Paketler</div>
+            <ul class="mt-4 space-y-2 text-sm">
+              <li><a href="#pricing" class="text-slate-600 hover:text-primary-600">Atıştırmalık</a></li>
+              <li><a href="#pricing" class="text-slate-600 hover:text-primary-600">Brunch</a></li>
+              <li><a href="#pricing" class="text-slate-600 hover:text-primary-600">Ofis Öğle</a></li>
+              <li><a href="#pricing" class="text-slate-600 hover:text-primary-600">Klasik Menü</a></li>
+              <li><a href="#pricing" class="text-slate-600 hover:text-primary-600">Gourmet</a></li>
+              <li><a href="#pricing" class="text-slate-600 hover:text-primary-600">Düğün Paketi</a></li>
+            </ul>
+          </div>
+          <div>
+            <div class="text-sm font-semibold text-slate-900 uppercase tracking-wide">İletişim</div>
+            <ul class="mt-4 space-y-2 text-sm">
+              <li><a href="tel:+908500000000" class="text-slate-600 hover:text-primary-600">0 850 000 00 00</a></li>
+              <li><a href="mailto:info@lezzetcatering.com" class="text-slate-600 hover:text-primary-600">info@lezzetcatering.com</a></li>
+              <li><a href="#contact" class="text-slate-600 hover:text-primary-600">Teklif Formu</a></li>
+              <li><a href="#faq" class="text-slate-600 hover:text-primary-600">S.S.S.</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p class="text-sm text-slate-500">© <span id="y"></span> Lezzet Catering. Tüm hakları saklıdır.</p>
+          <div class="flex items-center gap-5 text-sm">
+            <a href="#features" class="text-slate-600 hover:text-primary-600">Hizmetler</a>
+            <a href="#pricing" class="text-slate-600 hover:text-primary-600">Paketler</a>
+            <a href="#contact" class="text-slate-600 hover:text-primary-600">İletişim</a>
+            <a href="#faq" class="text-slate-600 hover:text-primary-600">S.S.S.</a>
+          </div>
+        </div>
+        <div class="mt-6 text-center">
+          <a href="#hero" class="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-primary-600">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4"><path fill-rule="evenodd" d="M12 3.75a.75.75 0 0 1 .75.75v12.69l4.22-4.22a.75.75 0 1 1 1.06 1.06l-5.5 5.5a.75.75 0 0 1-1.06 0l-5.5-5.5a.75.75 0 1 1 1.06-1.06l4.22 4.22V4.5A.75.75 0 0 1 12 3.75Z" clip-rule="evenodd" /></svg>
+            Baştaki bölüme dön
+          </a>
+        </div>
+      </div>
+    </footer>
+
+    <template id="tw-safelist" class="opacity-100 scale-100 translate-x-8 pointer-events-auto bg-primary-600 translate-x-8"></template>
+
+    <script>
+      
+      
+      
+      
+      
+      
+      // Dinamik yıl
+      document.getElementById('y').textContent = new Date().getFullYear()
+
+      
+      
+      
+      
+      
+      // Smooth scroll (iOS güvenli)
+      document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+        a.addEventListener('click', function (e) {
+          const id = this.getAttribute('href')
+          const el = id && id !== '#' ? document.querySelector(id) : null
+          if (!el) return
+          e.preventDefault()
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+          history.pushState(null, '', id)
+        })
+      })
+
+      
+      
+      
+      
+      
+      // Mobile menu
+      const menuBtn = document.getElementById('mobileMenuBtn')
+      const mobileMenu = document.getElementById('mobileMenu')
+      const mobileOverlay = document.getElementById('mobileOverlay')
+      const iconOpen = document.getElementById('iconOpen')
+      const iconClose = document.getElementById('iconClose')
+
+      function openMenu () {
+        menuBtn.setAttribute('aria-expanded', 'true')
+        mobileMenu.classList.remove('pointer-events-none', 'opacity-0', 'scale-95')
+        mobileMenu.classList.add('opacity-100', 'scale-100', 'pointer-events-auto')
+        mobileOverlay.classList.remove('hidden')
+        iconOpen.classList.add('hidden')
+        iconClose.classList.remove('hidden')
+        document.body.classList.add('overflow-hidden')
+      }
+
+      function closeMenu () {
+        menuBtn.setAttribute('aria-expanded', 'false')
+        mobileMenu.classList.add('pointer-events-none', 'opacity-0', 'scale-95')
+        mobileMenu.classList.remove('opacity-100', 'scale-100', 'pointer-events-auto')
+        mobileOverlay.classList.add('hidden')
+        iconOpen.classList.remove('hidden')
+        iconClose.classList.add('hidden')
+        document.body.classList.remove('overflow-hidden')
+      }
+
+      menuBtn?.addEventListener('click', () => {
+        const expanded = menuBtn.getAttribute('aria-expanded') === 'true'
+        expanded ? closeMenu() : openMenu()
+      })
+      mobileOverlay?.addEventListener('click', closeMenu)
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeMenu()
+      })
+      
+      
+      
+      
+      
+      // Menü içindeki linklere tıklandığında kapat
+      mobileMenu?.querySelectorAll('a[href^="#"]').forEach((lnk) => lnk.addEventListener('click', closeMenu))
+
+      
+      
+      
+      
+      
+      // Reveal on scroll
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.remove('opacity-0', 'translate-y-4')
+            revealObserver.unobserve(entry.target)
+          }
+        })
+      }, { threshold: 0.2 })
+      document.querySelectorAll('.reveal-on-scroll').forEach((el) => revealObserver.observe(el))
+
+      const promoData = [
+        {
+          title: 'Kampanya: Bu ay düğün paketlerinde %10 indirim',
+          subtitle: 'Şimdi teklif al, tarihimizi ayırt',
+          img: 'https://images.unsplash.com/photo-1529042410759-befb1204b468?q=80&w=640&auto=format&fit=crop',
+          cta: '#pricing'
+        },
+        {
+          title: 'Kurumsal toplantılara özel: Klasik Menü ₺279/kişi',
+          subtitle: 'Sıcak servis, hızlı kurulum',
+          img: 'https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?q=80&w=640&auto=format&fit=crop',
+          cta: '#pricing'
+        },
+        {
+          title: 'Brunch paketinde taze meyve ikramı bizden',
+          subtitle: 'Sınırlı süreli fırsat',
+          img: 'https://images.unsplash.com/photo-1525351484163-7529414344d8?q=80&w=640&auto=format&fit=crop',
+          cta: '#pricing'
+        }
+      ]
+      const promoTitle = document.getElementById('promoTitle')
+      const promoSubtitle = document.getElementById('promoSubtitle')
+      const promoImg = document.getElementById('promoImg')
+      const promoCTA = document.getElementById('promoCTA')
+      let promoIdx = 0
+      function setPromo(i){
+        const p = promoData[i]
+        if (!p) return
+        promoTitle.style.opacity = '0'
+        promoSubtitle.style.opacity = '0'
+        setTimeout(() => {
+          promoTitle.textContent = p.title
+          promoSubtitle.textContent = p.subtitle
+          promoImg.src = p.img
+          promoCTA.href = p.cta
+          promoTitle.style.opacity = '1'
+          promoSubtitle.style.opacity = '1'
+        }, 250)
+      }
+      let promoTimer = setInterval(nextPromo, 3500)
+      function nextPromo(){
+        promoIdx = (promoIdx + 1) % promoData.length
+        setPromo(promoIdx)
+      }
+      function prevPromo(){
+        promoIdx = (promoIdx - 1 + promoData.length) % promoData.length
+        setPromo(promoIdx)
+      }
+      function resetTimer(){
+        clearInterval(promoTimer)
+        promoTimer = setInterval(nextPromo, 3500)
+      }
+      document.getElementById('promoNext')?.addEventListener('click', () => { nextPromo(); resetTimer() })
+      document.getElementById('promoPrev')?.addEventListener('click', () => { prevPromo(); resetTimer() })
+
+      document.querySelectorAll('[data-accordion-button]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const expanded = btn.getAttribute('aria-expanded') === 'true'
+          const content = document.getElementById(btn.getAttribute('aria-controls'))
+          btn.setAttribute('aria-expanded', String(!expanded))
+          content?.classList.toggle('hidden')
+          const icon = btn.querySelector('svg')
+          icon?.classList.toggle('rotate-180')
+        })
+      })
+
+      
+      
+      
+      
+      
+      
+
+      
+      
+      
+      
+      
+      // Contact form: fake submit with success message
+      const contactForm = document.getElementById('contactForm')
+      const contactSuccess = document.getElementById('contactSuccess')
+      const contactSuccessClose = document.getElementById('contactSuccessClose')
+      contactForm?.addEventListener('submit', (e) => {
+        e.preventDefault()
+        
+        if (!contactForm.checkValidity()) {
+          contactForm.reportValidity()
+          return
+        }
+        contactSuccess?.classList.remove('hidden')
+        contactForm.reset()
+        
+        contactSuccess?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      })
+      contactSuccessClose?.addEventListener('click', () => {
+        contactSuccess?.classList.add('hidden')
+      })
+
+      const spotlight = document.getElementById('spotlight')
+      function setSpotlight(x, y) {
+        spotlight.style.background = `radial-gradient(600px circle at ${x}px ${y}px, rgba(249,115,22,.10), transparent 35%)`
+      }
+      window.addEventListener('mousemove', (e) => setSpotlight(e.clientX, e.clientY))
+      window.addEventListener('touchmove', (e) => {
+        const t = e.touches?.[0]
+        if (t) setSpotlight(t.clientX, t.clientY)
+      }, { passive: true })
+
+      const tiltEls = document.querySelectorAll('.tilt')
+      tiltEls.forEach((card) => {
+        let rAF = null
+        function onMove(e){
+          const rect = card.getBoundingClientRect()
+          const px = (e.clientX - rect.left) / rect.width
+          const py = (e.clientY - rect.top) / rect.height
+          const rx = (py - .5) * -8
+          const ry = (px - .5) * 12
+          const glowX = px * 100
+          const glowY = py * 100
+          cancelAnimationFrame(rAF)
+          rAF = requestAnimationFrame(() => {
+            card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg)`
+            card.style.boxShadow = `0 20px 40px -20px rgba(15, 23, 42, .25)`
+            card.style.backgroundImage = `radial-gradient(60rem 60rem at ${glowX}% ${glowY}%, rgba(99,102,241,.06), transparent 60%)`
+          })
+        }
+        function onLeave(){
+          cancelAnimationFrame(rAF)
+          card.style.transform = ''
+          card.style.boxShadow = ''
+          card.style.backgroundImage = ''
+        }
+        card.addEventListener('mousemove', onMove)
+        card.addEventListener('mouseleave', onLeave)
+        card.addEventListener('touchmove', (e) => {
+          const t = e.touches?.[0]
+          if (!t) return
+          onMove(t)
+        }, { passive: true })
+        card.addEventListener('touchend', onLeave)
+      })
+
+      const track = document.getElementById('testimonialsTrack')
+      const dots = Array.from(document.querySelectorAll('.testimonial-dot'))
+      let slide = 0
+      function setSlide(i){
+        slide = i
+        if (track) track.style.transform = `translateX(-${i * 100}%)`
+        dots.forEach((d, idx) => d.classList.toggle('bg-slate-900', idx === i))
+      }
+      dots.forEach((d, idx) => d.addEventListener('click', () => setSlide(idx)))
+      setInterval(() => setSlide((slide + 1) % 3), 6000)
+    </script>
+  </body>
+  
+</html>
+
+
