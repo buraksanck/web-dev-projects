@@ -145,12 +145,11 @@ function appendToDisplay(value) {
       currentValue = parseFloat(displayExpression);
       operator = value;
       displayExpression += value;
-      waitingForOperand = false; // ikinci sayı yazılacak
+      waitingForOperand = false;
       updateDisplay();
       return;
     }
   
-    // Nokta
     if (value === '.') {
       const parts = displayExpression.split(/[+\-*/]/);
       const lastPart = parts[parts.length - 1];
@@ -161,7 +160,6 @@ function appendToDisplay(value) {
       return;
     }
   
-    // Sayı
     if (displayExpression === '0' && value !== '.') {
       displayExpression = value;
     } else {
