@@ -64,4 +64,4 @@ Her proje kendi klasörü içinde bulunur ve ayrı çalıştırılabilir.
 - **Tarih/Saat özellikleri:** Bugünün tarihi başlıkta gösterilir, bitiş tarihi için minimum değer otomatik “şimdi”
 - **Gerçek zamanlı tazeleme:** Her dakikada bir istatistikler ve takvim otomatik güncellenir
 - **Kullanılan Teknolojiler:** HTML, CSS (Tailwind), JavaScript (vanilla)
-- 🔗 **Canlı Demo:** <a href="to-do-app/index.html">Canlı Demo</a>
+- 🔗 **Canlı Demo:** [Canlı Demo](https://buraksanck.github.io/web-dev-projects/to-do-app/index.html)
