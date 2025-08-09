@@ -39,3 +39,11 @@ Her proje kendi klasörü içinde bulunur ve ayrı çalıştırılabilir.
 - Okunan veriyi kopyalama ve temizleme özellikleri.
 - **Kullanılan Teknolojiler:** HTML, CSS (Tailwind), JavaScript, [qrcodejs](https://github.com/davidshimjs/qrcodejs), [jsQR](https://github.com/cozmo/jsQR)  
 - 🔗 **Canlı Demo:** <a href="https://buraksanck.github.io/web-dev-projects/qr-code-generator/index.html">Canlı Demo</a>
+
+### 6) 2048 – Tile Merge Puzzle
+- 4×4 ızgarada aynı sayıları birleştirerek 2048’e ulaş.
+- Klavye desteği: Ok tuşları / **WASD**; mobilde kaydırma (touch) ile oynanır.
+- **Skor** ve **En İyi Skor** (localStorage) takibi; **Yeni Oyun** butonu.
+- Kaydırma/çarpışma animasyonları; **kazandın/kaybettin** durum mesajları.
+- **Kullanılan Teknolojiler:** HTML, CSS (Tailwind), JavaScript  
+- 🔗 **Canlı Demo:** <a href="https://buraksanck.github.io/web-dev-projects/2048/index.html">Canlı Demo</a>
