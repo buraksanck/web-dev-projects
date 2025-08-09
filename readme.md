@@ -24,3 +24,9 @@ Her proje kendi klasörü içinde bulunur ve ayrı çalıştırılabilir.
 - **Çalışma Akışı:** 25 dk çalışma → 5 sn geri sayım → 5 dk mola → 5 sn geri sayım → yeni çalışma. Döngü otomatik devam eder.  
 - **Kullanılan Teknolojiler:** HTML, CSS (Tailwind), JavaScript  
 - 🔗 **Canlı Demo:** <a href="https://buraksanck.github.io/web-dev-projects/pomodoro-timer/index.html">Canlı Demo</a>
+
+### 4) Currency Exchange
+- Gerçek zamanlı döviz kuru hesaplama.
+- Seçilen iki para birimi arasında dönüşüm yapar.
+- **Kullanılan Teknolojiler:** HTML, CSS (Tailwind), JavaScript, ExchangeRate API
+- 🔗 **Canlı Demo:** <a href="https://buraksanck.github.io/web-dev-projects/exchange-currency/index.html">Canlı Demo</a>
