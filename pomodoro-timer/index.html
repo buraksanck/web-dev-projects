@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birlikte Çalışalım - Pomodoro Timer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .timer-circle {
+            background: conic-gradient(from 0deg, #10b981 var(--progress, 0%), #e5e7eb var(--progress, 0%) 100%);
+        }
+        .pulse-animation {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .5; }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 min-h-screen flex items-center justify-center p-4">
+    <div class="max-w-md w-full">
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-white mb-2">Birlikte Çalışalım</h1>
+            <p class="text-slate-300">Pomodoro Tekniği ile Verimli Çalışma</p>
+        </div>
+
+        <div class="bg-white/10 backdrop-blur-lg rounded-3xl p-8 shadow-2xl">
+            <div class="text-center mb-8">
+                <div class="relative w-64 h-64 mx-auto mb-6">
+                    <div class="timer-circle absolute inset-0 rounded-full p-2">
+                        <div class="bg-white rounded-full w-full h-full flex items-center justify-center">
+                            <div class="text-center">
+                                <div id="timeDisplay" class="text-5xl font-bold text-slate-800 mb-2">25:00</div>
+                                <div id="sessionType" class="text-lg font-medium text-slate-600">Çalışma Zamanı</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex justify-center space-x-4 mb-6">
+                    <button id="startBtn" class="bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 transform hover:scale-105">
+                        <i class="fas fa-play mr-2"></i>Başla
+                    </button>
+                    <button id="pauseBtn" class="bg-amber-500 hover:bg-amber-600 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 transform hover:scale-105 hidden">
+                        <i class="fas fa-pause mr-2"></i>Duraklat
+                    </button>
+                    <button id="resetBtn" class="bg-slate-500 hover:bg-slate-600 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 transform hover:scale-105">
+                        <i class="fas fa-redo mr-2"></i>Sıfırla
+                    </button>
+                </div>
+            </div>
+
+            <div class="border-t border-white/20 pt-6">
+                <div class="grid grid-cols-3 gap-4 mb-6">
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-white" id="completedSessions">0</div>
+                        <div class="text-sm text-slate-300">Tamamlanan</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-white" id="currentSession">1</div>
+                        <div class="text-sm text-slate-300">Mevcut Seans</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-white" id="totalTime">0m</div>
+                        <div class="text-sm text-slate-300">Toplam Süre</div>
+                    </div>
+                </div>
+
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-white font-medium">Çalışma Süresi</span>
+                        <div class="flex items-center space-x-2">
+                            <button id="workMinus" class="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center text-white hover:bg-white/30">
+                                <i class="fas fa-minus text-xs"></i>
+                            </button>
+                            <span id="workTime" class="text-white font-semibold w-12 text-center">25</span>
+                            <button id="workPlus" class="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center text-white hover:bg-white/30">
+                                <i class="fas fa-plus text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <span class="text-white font-medium">Mola Süresi</span>
+                        <div class="flex items-center space-x-2">
+                            <button id="breakMinus" class="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center text-white hover:bg-white/30">
+                                <i class="fas fa-minus text-xs"></i>
+                            </button>
+                            <span id="breakTime" class="text-white font-semibold w-12 text-center">5</span>
+                            <button id="breakPlus" class="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center text-white hover:bg-white/30">
+                                <i class="fas fa-plus text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 mt-6">
+            <div class="text-center mb-4">
+                <h2 class="text-xl font-semibold text-white mb-2">🍅 Pomodoro Tekniği Nedir?</h2>
+            </div>
+            
+            <div class="space-y-3 text-sm text-slate-300">
+                <p class="leading-relaxed">
+                    <strong class="text-white">Pomodoro Tekniği</strong>, 1980'lerde Francesco Cirillo tarafından geliştirilen, 
+                    odaklanmayı artıran ve verimliliği maksimize eden zaman yönetimi metodudur.
+                </p>
+                
+                <div class="grid md:grid-cols-2 gap-4 mt-4">
+                    <div class="space-y-2">
+                        <h3 class="font-semibold text-white flex items-center">
+                            <i class="fas fa-clock text-emerald-400 mr-2"></i>Nasıl Çalışır?
+                        </h3>
+                        <ul class="space-y-1 text-xs pl-4">
+                            <li>• 25 dakika kesintisiz çalışın</li>
+                            <li>• 5 dakika kısa mola verin</li>
+                            <li>• 4 pomodoro sonrası 15-30 dk uzun mola</li>
+                            <li>• Süreci tekrarlayın</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="space-y-2">
+                        <h3 class="font-semibold text-white flex items-center">
+                            <i class="fas fa-star text-amber-400 mr-2"></i>Faydaları
+                        </h3>
+                        <ul class="space-y-1 text-xs pl-4">
+                            <li>• Konsantrasyonu artırır</li>
+                            <li>• Procrastination'ı azaltır</li>
+                            <li>• Mental yorgunluğu önler</li>
+                            <li>• Zaman farkındalığı geliştirir</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="mt-4 p-3 bg-emerald-500/10 rounded-lg border border-emerald-500/20">
+                    <p class="text-xs text-emerald-300 text-center">
+                        <i class="fas fa-lightbulb mr-1"></i>
+                        <strong>İpucu:</strong> Mola sırasında ekrandan uzaklaşın, kısa yürüyüş yapın veya nefes egzersizi yapın.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-4">
+            <p class="text-slate-400 text-xs">Otomatik geçiş: Seans bitiminde 5 saniye sonra yeni seans başlar</p>
+        </div>
+    </div>
+
+    <div id="notification" class="fixed top-4 right-4 bg-emerald-500 text-white px-6 py-3 rounded-lg shadow-lg transform translate-x-full transition-transform duration-300">
+        <div class="flex items-center">
+            <i class="fas fa-check-circle mr-2"></i>
+            <span id="notificationText">Bildirim</span>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
