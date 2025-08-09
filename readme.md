@@ -25,7 +25,7 @@ Her proje kendi klasörü içinde bulunur ve ayrı çalıştırılabilir.
 - **Kullanılan Teknolojiler:** HTML, CSS (Tailwind), JavaScript  
 - 🔗 **Canlı Demo:** <a href="https://buraksanck.github.io/web-dev-projects/pomodoro-timer/index.html">Canlı Demo</a>
 
-### 4) Currency Exchange
+### 4) Döviz Kuru Hesaplayıcı
 - Gerçek zamanlı döviz kuru hesaplama.
 - Seçilen iki para birimi arasında dönüşüm yapar.
 - **Kullanılan Teknolojiler:** HTML, CSS (Tailwind), JavaScript, ExchangeRate API
